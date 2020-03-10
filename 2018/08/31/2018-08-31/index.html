@@ -1,0 +1,835 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="1. 鸡鸭相邻农场有 n 只鸡鸭排位一个队伍，鸡用”C表示，鸭用”D”表示。当鸡鸭挨着时会产生矛盾，需要对所排的队伍进行调整，使鸡鸭各在一边，每次调整只能让相邻的鸡和鸭交换位置，现在需要尽快完成队伍调整，你需要计算出最少需要调整多少次可以让上述情况最少。例如 CCDCC-&amp;gt;CCCDC-&amp;gt;CCCCD这样就能使之前的两处鸡鸭相邻变为一处鸡鸭相邻，需要调整队形两次。 输入描述：输入一个长度为">
+<meta property="og:type" content="article">
+<meta property="og:title" content="招商银行笔试">
+<meta property="og:url" content="http://lwy94.com/2018/08/31/2018-08-31/index.html">
+<meta property="og:site_name" content="Lewis Blog">
+<meta property="og:description" content="1. 鸡鸭相邻农场有 n 只鸡鸭排位一个队伍，鸡用”C表示，鸭用”D”表示。当鸡鸭挨着时会产生矛盾，需要对所排的队伍进行调整，使鸡鸭各在一边，每次调整只能让相邻的鸡和鸭交换位置，现在需要尽快完成队伍调整，你需要计算出最少需要调整多少次可以让上述情况最少。例如 CCDCC-&amp;gt;CCCDC-&amp;gt;CCCCD这样就能使之前的两处鸡鸭相邻变为一处鸡鸭相邻，需要调整队形两次。 输入描述：输入一个长度为">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-03-10T09:47:25.138Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="招商银行笔试">
+<meta name="twitter:description" content="1. 鸡鸭相邻农场有 n 只鸡鸭排位一个队伍，鸡用”C表示，鸭用”D”表示。当鸡鸭挨着时会产生矛盾，需要对所排的队伍进行调整，使鸡鸭各在一边，每次调整只能让相邻的鸡和鸭交换位置，现在需要尽快完成队伍调整，你需要计算出最少需要调整多少次可以让上述情况最少。例如 CCDCC-&amp;gt;CCCDC-&amp;gt;CCCCD这样就能使之前的两处鸡鸭相邻变为一处鸡鸭相邻，需要调整队形两次。 输入描述：输入一个长度为">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lwy94.com/2018/08/31/2018-08-31/"/>
+
+
+
+
+
+  <title> 招商银行笔试 | Lewis Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lewis Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">To be a serious man</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://lwy94.com/2018/08/31/2018-08-31/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lewis">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://xact01.baidupcs.com/file/0298b1bcaj45adcb8788906f48ab2342?bkt=en-6f7dc9883530f8c96a59d7e2c14dcd189f427f3a0497d945e31085d47dd54a2ebade2a63a872df1f6d80f3278eaa6707e3634df01d1ebfb9ce01870836a625ec&fid=908809731-250528-121112995556466&time=1583827532&sign=FDTAXGERLQlBHSKfW-DCb740ccc5511e5e8fedcff06b081203-MB%2BJOLw18gWNpPzW2QyMtGwOX1k%3D&to=125&size=5268&sta_dx=5268&sta_cs=1&sta_ft=jpg&sta_ct=0&sta_mt=0&fm2=MH%2CYangquan%2CAnywhere%2C%2Czhejiang%2Cct&ctime=1583827366&mtime=1583827366&resv0=-1&resv1=0&resv2=rlim&resv3=5&resv4=5268&vuk=908809731&iv=0&htype=&randtype=&newver=1&newfm=1&secfm=1&flow_ver=3&pkey=en-0c92be2a143c68eecb7f368a58902b205822c9de00e40d72c028df4d59da032bdf49f2d2f21d7f91853db3c0568c3f5135612dd23dff86e2305a5e1275657320&sl=79364174&expires=8h&rt=pr&r=502550304&vbdid=1873296544&fin=logo.jpg&fn=logo.jpg&rtype=1&dp-logid=1615855592165416009&dp-callid=0.1&hps=1&tsl=100&csl=100&fsl=-1&csign=X2N3OtsxLqbg93p2GbG9lVZfjA8%3D&so=0&ut=6&uter=4&serv=0&uc=2449482945&ti=425a61e7e7decc083f3bf61e7d04e18cab2fd74cdb4e7d47&reqlabel=250528_f_f93607c6c02ccdda61ba29841d0c9f12_-1_7e48f975cb9f35e6984278c291575b8f&by=themis">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lewis Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                招商银行笔试
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-08-31T17:45:49+08:00">
+                2018-08-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/08/31/2018-08-31/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2018/08/31/2018-08-31/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="1-鸡鸭相邻"><a href="#1-鸡鸭相邻" class="headerlink" title="1. 鸡鸭相邻"></a>1. 鸡鸭相邻</h2><p>农场有 n 只鸡鸭排位一个队伍，鸡用”C表示，鸭用”D”表示。当鸡鸭挨着时会产生矛盾，需要对所排的队伍进行调整，使鸡鸭各在一边，每次调整只能让相邻的鸡和鸭交换位置，现在需要尽快完成队伍调整，你需要计算出最少需要调整多少次可以让上述情况最少。例如 CCDCC-&gt;CCCDC-&gt;CCCCD这样就能使之前的两处鸡鸭相邻变为一处鸡鸭相邻，需要调整队形两次。</p>
+<p>输入描述：<br>输入一个长度为N，且只包含C和D的非空字符串</p>
+<p>输出描述：<br>使得最后仅有一处鸡鸭相邻，最少的交换次数</p>
+<p>输入例子：<br>CCDCC<br>DDCC</p>
+<p>输出例子：<br>2<br>4</p>
+<p>由于D只能和C交换，所以这个排序是稳定的<br>假定所有的D都移动到最后一个位置，然后把最后位置的D都依次向前移动0-(n-1)次就是要排序的结果，n是D的个数</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test12</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Scanner scan = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">		</div><div class="line">		String string = scan.nextLine();</div><div class="line">		helper(string);</div><div class="line">		</div><div class="line">		scan.close();</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">helper</span><span class="params">(String str)</span> </span>&#123;</div><div class="line">       <span class="keyword">int</span> lastIndex = str.length() - <span class="number">1</span>;</div><div class="line">       </div><div class="line">       <span class="keyword">int</span> dTimes = <span class="number">0</span>;</div><div class="line">       <span class="keyword">int</span> dIndexSum = <span class="number">0</span>;</div><div class="line">       </div><div class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; str.length(); i++) &#123;</div><div class="line">    	   <span class="keyword">if</span> (str.charAt(i) == <span class="string">'D'</span>) &#123;</div><div class="line">    		   dTimes++;</div><div class="line">    		   dIndexSum += i;</div><div class="line">    	   &#125;</div><div class="line">       &#125;</div><div class="line">       <span class="keyword">int</span> dMoveSum = <span class="number">0</span>;</div><div class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; dTimes; i++) &#123;</div><div class="line">    	   dMoveSum += i;</div><div class="line">       &#125;</div><div class="line">       </div><div class="line">       System.out.println(dTimes * lastIndex - dIndexSum - dMoveSum);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="2-一次买股票的最大利益"><a href="#2-一次买股票的最大利益" class="headerlink" title="2. 一次买股票的最大利益"></a>2. 一次买股票的最大利益</h2><p>给定一个正整数数组，它的第 i 个元素时比特币第 i 天的各个。如果你最多只允许完成一笔交易，设计一个算法来时间你所能获取的最大利润。</p>
+<p>输入描述：<br>正整数数组，以空格分隔的 n 个正整数</p>
+<p>输出描述：<br>最大利润</p>
+<p>输入例子：<br>7 1 5 3 6 4</p>
+<p>输出例子：<br>5</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Scanner scan = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">		</div><div class="line">		String string = scan.nextLine();</div><div class="line">		String[] strArr = string.split(<span class="string">" "</span>);</div><div class="line">		<span class="keyword">int</span> len = strArr.length;</div><div class="line">		<span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[len];</div><div class="line">		</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</div><div class="line">			arr[i] = Integer.valueOf(strArr[i]);</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		helper(arr);</div><div class="line">		</div><div class="line">		scan.close();</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span>[] prices)</span></span>&#123;</div><div class="line">		<span class="keyword">int</span> max = <span class="number">0</span>, minPrice = prices[<span class="number">0</span>];</div><div class="line"></div><div class="line">		<span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; prices.length; i++)&#123;</div><div class="line">			<span class="keyword">if</span>(prices[i] &lt; minPrice)&#123;</div><div class="line">				minPrice = prices[i];</div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				max = Math.max(max, prices[i] - minPrice);</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line"></div><div class="line">		System.out.println(max);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="3-最小吃饭速度"><a href="#3-最小吃饭速度" class="headerlink" title="3. 最小吃饭速度"></a>3. 最小吃饭速度</h2><p>小招喵喜欢吃喵粮。这里有 N 堆喵粮，第 i 堆中有 p[i] 粒喵粮。喵主人离开了，将在 H 小时后回来。小招喵可以决定她吃喵粮的速度 K。每小时她将会学则一堆喵粮，从中吃掉 K 粒，如果这堆喵粮少于 K 粒，她将吃掉这堆的所有喵粮，然后这一个小时内不会再吃更多的喵粮。小招喵喜欢慢慢吃，但仍然想在喵主人回来前吃掉所有的喵粮。返回她可以在 H 小时吃掉所有喵粮的最小速度 K (K 为整数)</p>
+<p>输入描述：<br>第一行输入为喵粮数组，以空格分隔的 N 个整数<br>第二行输入为 H 小时数</p>
+<p>输出描述：<br>最小速度 K</p>
+<p>输入例子：<br>3 6 7 11<br>8</p>
+<p>输出例子：<br>4</p>
+<p>这题例子给的好，乍一看累加之和是27，H = 8, k = 4, 正好是 27 / 8 向上取整 得 4， 直接求sum对H向上取整的通过率是33%<br>这时的 K 是一种最完美的情况<br>如 1 1 1 1 1 5 需要 6 个小时吃完，那么 K 应该是多少呢？ 10 / 6向上取整 得 2，它完美在 如果每堆喵粮的粒数是 2 2 2 2 2 2 就好了<br>那么我们需要去验证我们所求得的最小K是否能够在H小时内吃完，如果不能则k + 1，直到 H 小时能够吃完</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.util.*;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</div><div class="line">		Scanner scan = <span class="keyword">new</span> Scanner(System.in);</div><div class="line">		</div><div class="line">		String string = scan.nextLine();</div><div class="line">		String[] strArr = string.split(<span class="string">" "</span>);</div><div class="line">		<span class="keyword">int</span> len = strArr.length;</div><div class="line">		<span class="keyword">int</span>[] arr = <span class="keyword">new</span> <span class="keyword">int</span>[len];</div><div class="line">		</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; i++) &#123;</div><div class="line">			arr[i] = Integer.valueOf(strArr[i]);</div><div class="line">		&#125;</div><div class="line">		string = scan.nextLine();</div><div class="line">		<span class="keyword">int</span> h = Integer.valueOf(string); </div><div class="line">		</div><div class="line">		helper(arr, h);</div><div class="line">		</div><div class="line">		scan.close();</div><div class="line">		</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">helper</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> h)</span></span>&#123;</div><div class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">		</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</div><div class="line">			sum += arr[i];</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="keyword">int</span> k = <span class="number">0</span>;</div><div class="line">		<span class="keyword">if</span> (sum % h == <span class="number">0</span>) &#123;</div><div class="line">			k = sum / h; </div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			k = sum / h + <span class="number">1</span>;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="keyword">while</span> (!checkValid(arr, k, h)) &#123;</div><div class="line">			k++;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		System.out.println(k);</div><div class="line">	&#125;</div><div class="line">	</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">checkValid</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> k, <span class="keyword">int</span> h)</span> </span>&#123;</div><div class="line">		<span class="keyword">int</span> sum = <span class="number">0</span>;</div><div class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; arr.length; i++) &#123;</div><div class="line">			<span class="keyword">if</span> (arr[i] % k == <span class="number">0</span>) &#123;</div><div class="line">				sum += arr[i] / k; </div><div class="line">			&#125; <span class="keyword">else</span> &#123;</div><div class="line">				sum += arr[i] / k + <span class="number">1</span>;</div><div class="line">			&#125;</div><div class="line">		&#125;</div><div class="line">		<span class="keyword">if</span> (sum &gt; h) &#123;</div><div class="line">			<span class="keyword">return</span> <span class="keyword">false</span>;</div><div class="line">		&#125;</div><div class="line">		</div><div class="line">		<span class="keyword">return</span> <span class="keyword">true</span>;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xnyvm.com1.z0.glb.clouddn.com/wechat-reward-image.png" alt="Lewis WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7xnyvm.com1.z0.glb.clouddn.com/alipay-reward-image.jpg" alt="Lewis Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/08/30/2018-08-30/" rel="next" title="网易笔试">
+                <i class="fa fa-chevron-left"></i> 网易笔试
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/10/27/2018-10-27/" rel="prev" title="再见了，英雄联盟LOL">
+                再见了，英雄联盟LOL <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2018/08/31/2018-08-31/"
+           data-title="招商银行笔试" data-url="http://lwy94.com/2018/08/31/2018-08-31/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://xact01.baidupcs.com/file/0298b1bcaj45adcb8788906f48ab2342?bkt=en-6f7dc9883530f8c96a59d7e2c14dcd189f427f3a0497d945e31085d47dd54a2ebade2a63a872df1f6d80f3278eaa6707e3634df01d1ebfb9ce01870836a625ec&fid=908809731-250528-121112995556466&time=1583827532&sign=FDTAXGERLQlBHSKfW-DCb740ccc5511e5e8fedcff06b081203-MB%2BJOLw18gWNpPzW2QyMtGwOX1k%3D&to=125&size=5268&sta_dx=5268&sta_cs=1&sta_ft=jpg&sta_ct=0&sta_mt=0&fm2=MH%2CYangquan%2CAnywhere%2C%2Czhejiang%2Cct&ctime=1583827366&mtime=1583827366&resv0=-1&resv1=0&resv2=rlim&resv3=5&resv4=5268&vuk=908809731&iv=0&htype=&randtype=&newver=1&newfm=1&secfm=1&flow_ver=3&pkey=en-0c92be2a143c68eecb7f368a58902b205822c9de00e40d72c028df4d59da032bdf49f2d2f21d7f91853db3c0568c3f5135612dd23dff86e2305a5e1275657320&sl=79364174&expires=8h&rt=pr&r=502550304&vbdid=1873296544&fin=logo.jpg&fn=logo.jpg&rtype=1&dp-logid=1615855592165416009&dp-callid=0.1&hps=1&tsl=100&csl=100&fsl=-1&csign=X2N3OtsxLqbg93p2GbG9lVZfjA8%3D&so=0&ut=6&uter=4&serv=0&uc=2449482945&ti=425a61e7e7decc083f3bf61e7d04e18cab2fd74cdb4e7d47&reqlabel=250528_f_f93607c6c02ccdda61ba29841d0c9f12_-1_7e48f975cb9f35e6984278c291575b8f&by=themis"
+               alt="Lewis" />
+          <p class="site-author-name" itemprop="name">Lewis</p>
+           
+              <p class="site-description motion-element" itemprop="description">simple, happy, life</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/lwy2016" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/3013416475" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/li-wei-ya-44" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://wuchong.me" title="Jark's Blog" target="_blank">Jark's Blog</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-鸡鸭相邻"><span class="nav-number">1.</span> <span class="nav-text">1. 鸡鸭相邻</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-一次买股票的最大利益"><span class="nav-number">2.</span> <span class="nav-text">2. 一次买股票的最大利益</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-最小吃饭速度"><span class="nav-number">3.</span> <span class="nav-text">3. 最小吃饭速度</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lewis</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"lwy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

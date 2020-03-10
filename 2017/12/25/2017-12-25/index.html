@@ -1,0 +1,802 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="en">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="动态规划：通常是基于一个或多个初始状态，当前子问题的解由上一个子问题的解推出 其结构由 状态 和 转移方程 构成 最少硬币如果我们有面值为1元，3元和5元若干枚，如何用最少的硬币凑够11元？ 用f(i) = j 来表示凑够 i 元需要 j 个硬币f(0) = 0f(1) = f(1 - 1) + 1 = f(0) + 1 = 1f(2) = f(2 - 1) + 1 = f(1) + 1 = 2对">
+<meta property="og:type" content="article">
+<meta property="og:title" content="初识动态规划">
+<meta property="og:url" content="http://lwy94.com/2017/12/25/2017-12-25/index.html">
+<meta property="og:site_name" content="Lewis Blog">
+<meta property="og:description" content="动态规划：通常是基于一个或多个初始状态，当前子问题的解由上一个子问题的解推出 其结构由 状态 和 转移方程 构成 最少硬币如果我们有面值为1元，3元和5元若干枚，如何用最少的硬币凑够11元？ 用f(i) = j 来表示凑够 i 元需要 j 个硬币f(0) = 0f(1) = f(1 - 1) + 1 = f(0) + 1 = 1f(2) = f(2 - 1) + 1 = f(1) + 1 = 2对">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-03-10T09:36:01.872Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="初识动态规划">
+<meta name="twitter:description" content="动态规划：通常是基于一个或多个初始状态，当前子问题的解由上一个子问题的解推出 其结构由 状态 和 转移方程 构成 最少硬币如果我们有面值为1元，3元和5元若干枚，如何用最少的硬币凑够11元？ 用f(i) = j 来表示凑够 i 元需要 j 个硬币f(0) = 0f(1) = f(1 - 1) + 1 = f(0) + 1 = 1f(2) = f(2 - 1) + 1 = f(1) + 1 = 2对">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"right","display":"post","offset":12,"offset_float":0,"b2t":false,"scrollpercent":false},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://lwy94.com/2017/12/25/2017-12-25/"/>
+
+
+
+
+
+  <title> 初识动态规划 | Lewis Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-right page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Lewis Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">To be a serious man</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-sitemap">
+          <a href="/sitemap.xml" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-sitemap"></i> <br />
+            
+            Sitemap
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            Commonweal 404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+    <link itemprop="mainEntityOfPage" href="http://lwy94.com/2017/12/25/2017-12-25/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Lewis">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="https://xact01.baidupcs.com/file/0298b1bcaj45adcb8788906f48ab2342?bkt=en-6f7dc9883530f8c96a59d7e2c14dcd189f427f3a0497d945e31085d47dd54a2ebade2a63a872df1f6d80f3278eaa6707e3634df01d1ebfb9ce01870836a625ec&fid=908809731-250528-121112995556466&time=1583827532&sign=FDTAXGERLQlBHSKfW-DCb740ccc5511e5e8fedcff06b081203-MB%2BJOLw18gWNpPzW2QyMtGwOX1k%3D&to=125&size=5268&sta_dx=5268&sta_cs=1&sta_ft=jpg&sta_ct=0&sta_mt=0&fm2=MH%2CYangquan%2CAnywhere%2C%2Czhejiang%2Cct&ctime=1583827366&mtime=1583827366&resv0=-1&resv1=0&resv2=rlim&resv3=5&resv4=5268&vuk=908809731&iv=0&htype=&randtype=&newver=1&newfm=1&secfm=1&flow_ver=3&pkey=en-0c92be2a143c68eecb7f368a58902b205822c9de00e40d72c028df4d59da032bdf49f2d2f21d7f91853db3c0568c3f5135612dd23dff86e2305a5e1275657320&sl=79364174&expires=8h&rt=pr&r=502550304&vbdid=1873296544&fin=logo.jpg&fn=logo.jpg&rtype=1&dp-logid=1615855592165416009&dp-callid=0.1&hps=1&tsl=100&csl=100&fsl=-1&csign=X2N3OtsxLqbg93p2GbG9lVZfjA8%3D&so=0&ut=6&uter=4&serv=0&uc=2449482945&ti=425a61e7e7decc083f3bf61e7d04e18cab2fd74cdb4e7d47&reqlabel=250528_f_f93607c6c02ccdda61ba29841d0c9f12_-1_7e48f975cb9f35e6984278c291575b8f&by=themis">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Lewis Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                初识动态规划
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2017-12-25T17:26:30+08:00">
+                2017-12-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2017/12/25/2017-12-25/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/12/25/2017-12-25/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>动态规划：<br>通常是基于一个或多个初始状态，当前子问题的解由上一个子问题的解推出</p>
+<p>其结构由 状态 和 转移方程 构成</p>
+<p>最少硬币<br>如果我们有面值为1元，3元和5元若干枚，如何用最少的硬币凑够11元？</p>
+<p>用f(i) = j 来表示凑够 i 元需要 j 个硬币<br>f(0) = 0<br>f(1) = f(1 - 1) + 1 = f(0) + 1 = 1<br>f(2) = f(2 - 1) + 1 = f(1) + 1 = 2<br>对于f(3)有两种方案<br>f(3) = f(3 - 1) + 1 = f(2) + 1 = 3<br>f(3) = f(3 - 3) + 1 = f(0) + 1 = 1<br>那么状态转移方程为<br>f(3) = min{f(3 - 1) + 1, f(3 - 3) + 1}<br>即<br>f(i) = min{d(i - Vj) + 1}, 其中 i - Vj &gt; 0, Vj 表示第 j 个硬币的面值</p>
+<a id="more"></a>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">MinCoinCount</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span>[] v = <span class="keyword">new</span> <span class="keyword">int</span>[]&#123;<span class="number">1</span>, <span class="number">3</span>, <span class="number">5</span>&#125;;</div><div class="line">    <span class="keyword">int</span>[] f = <span class="keyword">new</span> <span class="keyword">int</span>[n + <span class="number">1</span>];</div><div class="line">    f[<span class="number">0</span>] = <span class="number">0</span>;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt;= n; i++) &#123;</div><div class="line">        f[i] = i;  <span class="comment">// 最坏的情况下，全部由1元的硬币组成</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; v.length; j++) &#123;</div><div class="line">            <span class="keyword">if</span> (v[j] &lt;= i &amp;&amp; f[i - v[j]] + <span class="number">1</span> &lt; f[i]) &#123;</div><div class="line">                f[i] = f[i - v[j]] + <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    </div><div class="line">    <span class="keyword">return</span> f[n];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最长非降序子序列长度 Longest Increasing SubSequence<br>5, 3, 4, 8, 6, 7，2</p>
+<p>前 1 个 LIS 长度 f(1) = 1 序列 5<br>前 2 个 LIS 长度 f(2) = 1 序列 3<br>前 3 个 LIS 长度 f(3) = 2 序列 3, 4<br>前 4 个 LIS 长度 f(4) = 3 序列 3, 4, 8<br>前 5 个 LIS 长度 f(5) = 3 序列 3, 4, 6<br>前 6 个 LIS 长度 f(6) = 4 序列 3, 4, 6, 7<br>前 7 个 LIS 长度 f(7) = 1 序列 2</p>
+<p>f(i) 表示前 i 个数中以 nums[i] 结尾的 最长非降序子序列长度<br>状态转移方程<br>f(i) = max{1, f(j) + 1}, 其中 j &lt; i, A[j] &lt;= A[i]</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">LongestIncreasingSubSequence</span><span class="params">(<span class="keyword">int</span>[] nums)</span> </span>&#123;</div><div class="line">    <span class="keyword">int</span>[] f = <span class="keyword">new</span> <span class="keyword">int</span>[nums.length];</div><div class="line">    <span class="keyword">int</span> maxLen = <span class="number">1</span>;</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; nums.length; i++) &#123;</div><div class="line">        f[i] = <span class="number">1</span>;  <span class="comment">// 最坏情况下，最长子序列的长度为1</span></div><div class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; i; j++) &#123;</div><div class="line">            <span class="keyword">if</span> (nums[j] &lt;= nums[i] &amp;&amp; f[j] + <span class="number">1</span> &gt; f[i]) &#123;</div><div class="line">                f[i] = f[j] + <span class="number">1</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">// 记录最大长度</span></div><div class="line">        <span class="keyword">if</span> (f[i] &gt; maxLen) maxLen = f[i];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    <span class="keyword">return</span> maxLen;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最终的最长非降序子序列是 1,1,2,3,3,4,1<br>该过程需要找到的是其中长度最大的一个，申请的长度是n</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+  <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+    <div>坚持原创技术分享，您的支持将鼓励我继续创作！</div>
+    <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+      <span>赏</span>
+    </button>
+    <div id="QR" style="display: none;">
+      
+        <div id="wechat" style="display: inline-block">
+          <img id="wechat_qr" src="http://7xnyvm.com1.z0.glb.clouddn.com/wechat-reward-image.png" alt="Lewis WeChat Pay"/>
+          <p>微信打赏</p>
+        </div>
+      
+      
+        <div id="alipay" style="display: inline-block">
+          <img id="alipay_qr" src="http://7xnyvm.com1.z0.glb.clouddn.com/alipay-reward-image.jpg" alt="Lewis Alipay"/>
+          <p>支付宝打赏</p>
+        </div>
+      
+    </div>
+  </div>
+
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+
+      
+        
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/27/2017-11-27/" rel="next" title="sublime下Java开发">
+                <i class="fa fa-chevron-left"></i> sublime下Java开发
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/08/22/2018-08-22/" rel="prev" title="早睡带来的舒适感">
+                早睡带来的舒适感 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+          
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/12/25/2017-12-25/"
+           data-title="初识动态规划" data-url="http://lwy94.com/2017/12/25/2017-12-25/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview sidebar-panel sidebar-panel-active">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="https://xact01.baidupcs.com/file/0298b1bcaj45adcb8788906f48ab2342?bkt=en-6f7dc9883530f8c96a59d7e2c14dcd189f427f3a0497d945e31085d47dd54a2ebade2a63a872df1f6d80f3278eaa6707e3634df01d1ebfb9ce01870836a625ec&fid=908809731-250528-121112995556466&time=1583827532&sign=FDTAXGERLQlBHSKfW-DCb740ccc5511e5e8fedcff06b081203-MB%2BJOLw18gWNpPzW2QyMtGwOX1k%3D&to=125&size=5268&sta_dx=5268&sta_cs=1&sta_ft=jpg&sta_ct=0&sta_mt=0&fm2=MH%2CYangquan%2CAnywhere%2C%2Czhejiang%2Cct&ctime=1583827366&mtime=1583827366&resv0=-1&resv1=0&resv2=rlim&resv3=5&resv4=5268&vuk=908809731&iv=0&htype=&randtype=&newver=1&newfm=1&secfm=1&flow_ver=3&pkey=en-0c92be2a143c68eecb7f368a58902b205822c9de00e40d72c028df4d59da032bdf49f2d2f21d7f91853db3c0568c3f5135612dd23dff86e2305a5e1275657320&sl=79364174&expires=8h&rt=pr&r=502550304&vbdid=1873296544&fin=logo.jpg&fn=logo.jpg&rtype=1&dp-logid=1615855592165416009&dp-callid=0.1&hps=1&tsl=100&csl=100&fsl=-1&csign=X2N3OtsxLqbg93p2GbG9lVZfjA8%3D&so=0&ut=6&uter=4&serv=0&uc=2449482945&ti=425a61e7e7decc083f3bf61e7d04e18cab2fd74cdb4e7d47&reqlabel=250528_f_f93607c6c02ccdda61ba29841d0c9f12_-1_7e48f975cb9f35e6984278c291575b8f&by=themis"
+               alt="Lewis" />
+          <p class="site-author-name" itemprop="name">Lewis</p>
+           
+              <p class="site-description motion-element" itemprop="description">simple, happy, life</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives">
+                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              
+                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-name">tags</span>
+              
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/lwy2016" target="_blank" title="github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  github
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/3013416475" target="_blank" title="weibo">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  weibo
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/li-wei-ya-44" target="_blank" title="zhihu">
+                  
+                    <i class="fa fa-fw fa-globe"></i>
+                  
+                  zhihu
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://macshuo.com/" title="MacTalk" target="_blank">MacTalk</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://wuchong.me" title="Jark's Blog" target="_blank">Jark's Blog</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy;  2014 - 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Lewis</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+    
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"lwy"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
