@@ -390,9 +390,9 @@
       
 
       
-        <h2 id="1-文件命名为-runJava-bat-且保存在-jdk-bin-目录下"><a href="#1-文件命名为-runJava-bat-且保存在-jdk-bin-目录下" class="headerlink" title="1.文件命名为 runJava.bat 且保存在 jdk/bin 目录下"></a>1.文件命名为 runJava.bat 且保存在 jdk/bin 目录下</h2><figure class="highlight mel"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@echo off</div><div class="line">cd %~dp1</div><div class="line">echo Compiling %~nx1......</div><div class="line"><span class="keyword">if</span> exist %~n1.class (</div><div class="line">del %~n1.class</div><div class="line">)</div><div class="line">javac -encoding UTF<span class="number">-8</span> %~nx1</div><div class="line"><span class="keyword">if</span> exist %~n1.class (</div><div class="line">echo ------Output------</div><div class="line">java %~n1</div><div class="line">)</div></pre></td></tr></table></figure>
+        <h2 id="1-文件命名为-runJava-bat-且保存在-jdk-bin-目录下"><a href="#1-文件命名为-runJava-bat-且保存在-jdk-bin-目录下" class="headerlink" title="1.文件命名为 runJava.bat 且保存在 jdk/bin 目录下"></a>1.文件命名为 runJava.bat 且保存在 jdk/bin 目录下</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">@echo off</div><div class="line">cd %~dp1</div><div class="line">echo Compiling %~nx1......</div><div class="line">if exist %~n1.class (</div><div class="line">del %~n1.class</div><div class="line">)</div><div class="line">javac -encoding UTF-8 %~nx1</div><div class="line">if exist %~n1.class (</div><div class="line">echo ------Output------</div><div class="line">java %~n1</div><div class="line">)</div></pre></td></tr></table></figure>
 <h2 id="2-修改-sublime-的运行方式"><a href="#2-修改-sublime-的运行方式" class="headerlink" title="2.修改 sublime 的运行方式"></a>2.修改 sublime 的运行方式</h2><h3 id="2-1-安装-Package-Resource-Viewer"><a href="#2-1-安装-Package-Resource-Viewer" class="headerlink" title="2.1 安装 Package Resource Viewer"></a>2.1 安装 Package Resource Viewer</h3><p>ctrl+shift+p 打开 package control<br>输入 install package<br>搜索 package resource viewer</p>
-<h3 id="2-2-修改-Javac-sublime-build-文件"><a href="#2-2-修改-Javac-sublime-build-文件" class="headerlink" title="2.2 修改 Javac.sublime-build 文件"></a>2.2 修改 Javac.sublime-build 文件</h3><p>ctrl+shift+p 打开 package control<br>输入 open resource<br>回车后 输入 java<br>回车后 选择 Javac.sublime-build 就能够打开我们需要修改的文件<br><figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"shell_cmd"</span>: <span class="string">"runJava.bat \"$file\""</span>,</div><div class="line">    <span class="attr">"file_regex"</span>: <span class="string">"^(...*?):([0-9]*):?([0-9]*)"</span>,</div><div class="line">    <span class="attr">"selector"</span>: <span class="string">"source.java"</span>,</div><div class="line">    <span class="attr">"encoding"</span>: <span class="string">"utf-8"</span></div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="2-2-修改-Javac-sublime-build-文件"><a href="#2-2-修改-Javac-sublime-build-文件" class="headerlink" title="2.2 修改 Javac.sublime-build 文件"></a>2.2 修改 Javac.sublime-build 文件</h3><p>ctrl+shift+p 打开 package control<br>输入 open resource<br>回车后 输入 java<br>回车后 选择 Javac.sublime-build 就能够打开我们需要修改的文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;shell_cmd&quot;: &quot;runJava.bat \&quot;$file\&quot;&quot;,</div><div class="line">    &quot;file_regex&quot;: &quot;^(...*?):([0-9]*):?([0-9]*)&quot;,</div><div class="line">    &quot;selector&quot;: &quot;source.java&quot;,</div><div class="line">    &quot;encoding&quot;: &quot;utf-8&quot;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h2 id="3-Ctrl-B-运行即可"><a href="#3-Ctrl-B-运行即可" class="headerlink" title="3.Ctrl+B 运行即可"></a>3.Ctrl+B 运行即可</h2>
       
     </div>
@@ -538,7 +538,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">11</span>
+                <span class="site-state-item-count">12</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -551,7 +551,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">2</span>
+                <span class="site-state-item-count">3</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>
