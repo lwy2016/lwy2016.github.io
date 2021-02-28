@@ -105,18 +105,18 @@
 
 
 
-<meta name="description" content="树的一些通用解法：跟树相关的题，90%的都可以用递归解决，一般需要一个helper辅助函数来进行递归相对于迭代解决问题，递归代码量较少且清晰简便    # Title Solution Difficulty     094 Binary Tree Inorder Traversal Solution Medium   095 Unique Binary Search Trees II Soluti">
+<meta name="description" content="树的一些通用解法：跟树相关的题，90%的都可以用递归解决，一般需要一个helper辅助函数来进行递归，递归都会有递归终止条件相对于迭代解决问题，递归代码量较少且清晰简便 // 先序操作helper(root.left);// 中序操作helper(root.right);// 后续操作  094.中序遍历，迭代：使用辅助栈，当root!=null&amp;amp;&amp;amp;!queue.isEmpty()">
 <meta name="keywords" content="tree">
 <meta property="og:type" content="article">
 <meta property="og:title" content="leetcode 二叉树专题">
 <meta property="og:url" content="http://lwy94.com/2020/03/14/2020-03-14/index.html">
 <meta property="og:site_name" content="Lewis Blog">
-<meta property="og:description" content="树的一些通用解法：跟树相关的题，90%的都可以用递归解决，一般需要一个helper辅助函数来进行递归相对于迭代解决问题，递归代码量较少且清晰简便    # Title Solution Difficulty     094 Binary Tree Inorder Traversal Solution Medium   095 Unique Binary Search Trees II Soluti">
+<meta property="og:description" content="树的一些通用解法：跟树相关的题，90%的都可以用递归解决，一般需要一个helper辅助函数来进行递归，递归都会有递归终止条件相对于迭代解决问题，递归代码量较少且清晰简便 // 先序操作helper(root.left);// 中序操作helper(root.right);// 后续操作  094.中序遍历，迭代：使用辅助栈，当root!=null&amp;amp;&amp;amp;!queue.isEmpty()">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-03-21T11:47:32.687Z">
+<meta property="og:updated_time" content="2020-03-21T13:13:07.605Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="leetcode 二叉树专题">
-<meta name="twitter:description" content="树的一些通用解法：跟树相关的题，90%的都可以用递归解决，一般需要一个helper辅助函数来进行递归相对于迭代解决问题，递归代码量较少且清晰简便    # Title Solution Difficulty     094 Binary Tree Inorder Traversal Solution Medium   095 Unique Binary Search Trees II Soluti">
+<meta name="twitter:description" content="树的一些通用解法：跟树相关的题，90%的都可以用递归解决，一般需要一个helper辅助函数来进行递归，递归都会有递归终止条件相对于迭代解决问题，递归代码量较少且清晰简便 // 先序操作helper(root.left);// 中序操作helper(root.right);// 后续操作  094.中序遍历，迭代：使用辅助栈，当root!=null&amp;amp;&amp;amp;!queue.isEmpty()">
 
 
 
@@ -391,7 +391,12 @@
       
 
       
-        <p>树的一些通用解法：<br>跟树相关的题，90%的都可以用递归解决，一般需要一个helper辅助函数来进行递归<br>相对于迭代解决问题，递归代码量较少且清晰简便</p>
+        <p>树的一些通用解法：<br>跟树相关的题，90%的都可以用递归解决，一般需要一个helper辅助函数来进行递归，递归都会有递归终止条件<br>相对于迭代解决问题，递归代码量较少且清晰简便</p>
+<p>// 先序操作<br>helper(root.left);<br>// 中序操作<br>helper(root.right);<br>// 后续操作</p>
+<ul>
+<li>094.中序遍历，迭代：使用辅助栈，当root!=null&amp;&amp;!queue.isEmpty()时一直遍历左子树，将左节点存入栈中，否则pop栈中节点root，将root.val给list，遍历右节点，递归：在递归左右节点之间，将root.val放入list中</li>
+<li>095.</li>
+</ul>
 <table>
 <thead>
 <tr>
@@ -714,7 +719,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives">
-                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -727,7 +732,7 @@
             
             <div class="site-state-item site-state-tags">
               
-                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">tags</span>
               
             </div>
@@ -816,7 +821,7 @@
         <div class="copyright" >
   
   &copy;  2014 - 
-  <span itemprop="copyrightYear">2020</span>
+  <span itemprop="copyrightYear">2021</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
